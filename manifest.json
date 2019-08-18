@@ -1,0 +1,27 @@
+{
+	"manifest_version": 2,
+	"name": "Badoo spam bot",
+	"version": "1.0.2",
+	"description": "spam bot.",
+	"icons": {
+		"128": "./icons/icon128.png",
+		"48": "./icons/icon48.png",
+		"16": "./icons/icon16.png"
+	},
+	"browser_action": {
+		"default_icon": "./icons/icon16.png",
+		"default_popup": "./popup/src/dist/index.html"
+	},
+	"permissions": [ "storage", "notifications", "contextMenus", "tabs", "activeTab" ],
+	"content_scripts": [
+		{
+			"matches": [ "https://*.badoo.com/*" ],
+			"js": [ "./content-scripts/dist/main.bundle.js" ],
+			"run_at": "document_end"
+		}
+	],
+
+	"_comments": {
+		"default_popup": "./popup/src/dist/index.html"
+	}
+}
