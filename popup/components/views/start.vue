@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../src/assets/scss/variables.scss";
-@import "../src/assets/scss/base.scss";
-@import "../src/assets/scss/helpers.scss";
+@import "../../assets/scss/variables.scss";
+@import "../../assets/scss/base.scss";
+@import "../../assets/scss/helpers.scss";
 </style>
