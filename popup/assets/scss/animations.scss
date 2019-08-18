@@ -1,0 +1,17 @@
+@keyframes jumpingArrow {
+	100% {
+		// transform: translateY(3px);
+		opacity: 0;
+	}
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity, transform .5s;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+	transform: translateX(100%);
+	position: absolute;
+	top: 0;
+}
