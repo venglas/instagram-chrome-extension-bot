@@ -1,0 +1,34 @@
+{
+	"name": "Instagram-bot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"audit": "source-map-explorer public/dist/main.bundle.js",
+		"clear": "rm -rf public/dist/",
+		"clear:all": "rm -rf node_modules/ && npm run clear",
+		"count": "find src -name '*.js' | xargs wc -l | sort -r",
+		"build": "webpack",
+		"watch-cs": "webpack -w",
+		"start": "node public/dist/main.bundle.js",
+		"build-css": "node-sass --include-path scss scss/main.scss css/index.css",
+		"watch-sass": "nodemon -e scss -x \"npm run build-css\""
+	},
+	"devDependencies": {
+		"@babel/core": "^7.3.4",
+		"@babel/preset-env": "^7.3.4",
+		"babel-loader": "^8.0.5",
+		"source-map-explorer": "^1.7.0",
+		"webpack": "^4.29.6",
+		"webpack-cli": "^3.2.3"
+	},
+	"author": "venglas",
+	"license": "ISC",
+	"dependencies": {
+		"lodash": "^4.17.11",
+		"lodash.debounce": "^4.0.8",
+		"node-sass": "^4.12.0",
+		"nodemon": "^1.19.1",
+		"vue": "^1.0.28-csp"
+	}
+}
