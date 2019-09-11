@@ -1,6 +1,0 @@
-./yarn.lock
-./package-lock.json
-
-./popup/yarn.lock
-./popup/package-lock.json
-node_modules
