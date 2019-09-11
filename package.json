@@ -1,0 +1,12 @@
+{
+  "name": "instagram-bot",
+  "version": "1.0.0",
+  "description": "simple instagram bot",
+  "main": "index.js",
+  "repository": "https://github.com/venglas/instagram-chrome-extension-bot.git",
+  "author": "Venglas <bartek.bober97@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^1.19.0"
+  }
+}
