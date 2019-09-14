@@ -1,12 +1,16 @@
 const ig = require('./instagram');
 const config = require('./config');
 
+const setLanguage = require('./setLanguage');
+const login = require('./login');
+const closeNotificationModal = require('./closeNotificationModal');
+
 (async () => {
 	await ig.init();
 
-	await ig.setLanguage();
+	await setLanguage();
 
-	await ig.login(config.username, config.password);
+	await login(config.username, config.password);
 
-	await ig.closeNotificationModal();
+	await closeNotificationModal();
 })();
