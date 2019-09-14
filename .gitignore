@@ -1,5 +1,8 @@
 # directories
 /node_modules
 
-# files
+# files:
 package-lock.json
+
+# here is all configuration for running bot 
+./bot/config.js

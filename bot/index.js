@@ -3,5 +3,7 @@ const ig = require('./instagram');
 (async () => {
 	await ig.init();
 
-	debugger;
+	await ig.login();
+
+	// debugger;
 })();
