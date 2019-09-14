@@ -5,4 +5,4 @@
 package-lock.json
 
 # here is all configuration for running bot 
-./bot/config.js
+bot/config.js
