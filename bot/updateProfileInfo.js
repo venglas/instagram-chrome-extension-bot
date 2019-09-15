@@ -32,6 +32,7 @@ const updateProfileInfo = async () => {
 	fs.writeFileSync('./bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
 
 	console.timeEnd('Profile info updated:');
+	console.log(profileInfo);
 	consoleLineBreak('=');
 
 	// TODO: add function which show us +/- followers since last bot use
