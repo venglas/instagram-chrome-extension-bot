@@ -1,8 +1,10 @@
 const ig = require('./instagram');
 const config = require('./config');
 const fs = require('fs');
+const consoleLineBreak = require('./helpers/consoleLineBreak');
 
 const updateProfileInfo = async () => {
+	console.time('Profile info updated:');
 	await ig.page.goto(`${ig.BASE_URL}/${config.username}`);
 
 	// Get text from xPath count number of posts
@@ -29,7 +31,8 @@ const updateProfileInfo = async () => {
 	const changedData = JSON.stringify(profileInfo);
 	fs.writeFileSync('./bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
 
-	console.log('Profile info updated:', profileInfo);
+	console.timeEnd('Profile info updated:');
+	consoleLineBreak('=');
 
 	// TODO: add function which show us +/- followers since last bot use
 };
