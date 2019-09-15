@@ -10,7 +10,7 @@ const instagram = {
 			headless: false
 		});
 
-		instagram.page = await instagram.browser.newPage();
+		instagram.page = await instagram.browser.newPage(); // Create new tab in chromium
 	}
 };
 

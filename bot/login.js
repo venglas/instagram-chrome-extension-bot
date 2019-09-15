@@ -4,7 +4,7 @@ const login = async (username, password) => {
 	await ig.page.goto(`${ig.BASE_URL}/accounts/login/`, { waitUntil: 'networkidle2' });
 
 	await ig.page.waitForSelector('input[name="username"');
-	await ig.page.type('input[name="username"]', username, { delay: 25 });
+	await ig.page.type('input[name="username"]', username, { delay: 25 }); // delay is 25ms after every keyboard click
 
 	await ig.page.waitForSelector('input[name="password"]');
 	await ig.page.type('input[name="password"]', password, { delay: 25 });
