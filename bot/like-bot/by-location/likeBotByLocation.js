@@ -20,6 +20,12 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 
 				await ig.page.goto(`${ig.LOCATIONS_URL}/${locationCode}`, { waitUntil: 'networkidle2' });
 				await ig.page.waitFor(3000);
+				// TODO:
+
+				// select first 10-20-30 first fresh photos of location and add it all to array
+				//  go to next location and do same thing till locations list end
+				// after fill all locations photos go to liking via array of photo links
+				// array with photo links can be store in other json file or in varaible in this file
 			}
 		}
 	}
