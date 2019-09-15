@@ -4,6 +4,7 @@ const instagram = {
 	browser: null,
 	page: null,
 	BASE_URL: 'https://instagram.com',
+	LOCATIONS_URL: 'https://instagram.com/explore/locations',
 
 	init: async () => {
 		instagram.browser = await puppeteer.launch({
