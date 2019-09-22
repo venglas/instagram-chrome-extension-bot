@@ -1,0 +1,4 @@
+*config file*
+- config.js
+    In config file you can configurate all your starting envirement, if you go to this file everything inside is descripted
+    

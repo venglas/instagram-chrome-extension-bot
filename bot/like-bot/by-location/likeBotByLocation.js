@@ -1,8 +1,10 @@
 const fs = require('fs');
 const ig = require('../../instagram');
 
+const getPhotos = require('../getPhotos');
+
 const likeBotByLocation = async (likeByLocationConfig) => {
-	const locations = fs.readFileSync('./bot/bot-data/locations.json'); // Load all polish city locations code
+	const locations = fs.readFileSync('./bot-data/locations.json'); // Load all polish city locations code
 	const pasredLocations = JSON.parse(locations);
 
 	const entries = Object.entries(pasredLocations); // rewrite object to array which contains pair arrays [[name, value], [[name], [value]]]
@@ -21,6 +23,7 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 				await ig.page.goto(`${ig.LOCATIONS_URL}/${locationCode}`, { waitUntil: 'networkidle2' });
 				await ig.page.waitFor(3000);
 				// TODO:
+				await getPhotos();
 
 				// select first 10-20-30 first fresh photos of location and add it all to array
 				//  go to next location and do same thing till locations list end
