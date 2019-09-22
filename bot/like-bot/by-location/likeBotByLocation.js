@@ -1,5 +1,6 @@
 const fs = require('fs');
 const ig = require('../../instagram');
+const config = require('../../config');
 
 const getPhotos = require('../getPhotos');
 const likePhotos = require('../likePhotos');
@@ -21,16 +22,15 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 			if (likeByLocationConfig.locations.includes(locationName)) {
 				console.log(`You selected: ${locationName}/${locationCode} `);
 
-				await ig.page.goto(`${ig.LOCATIONS_URL}/${locationCode}`, { waitUntil: 'networkidle2' });
-				await ig.page.waitFor(3000);
-				// TODO:
-				const newestPhotos = await getPhotos();
+				await ig.page.goto(`${ig.LOCATIONS_URL}/${locationCode}`, { waitUntil: 'networkidle2' }); // change location
+				await ig.page.waitFor(config.likeByLocation.waitAfterChangeLocation); // wait after change location
 
-				await likePhotos(newestPhotos);
+				const newestPhotos = await getPhotos(); // list of photos (array)
+
+				await likePhotos(newestPhotos); // like list of photos
 
 				//  go to next location and do same thing till locations list end
 				// after fill all locations photos go to liking via array of photo links
-				// array with photo links can be store in other json file or in varaible in this file
 			}
 		}
 	}

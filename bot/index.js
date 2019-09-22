@@ -10,9 +10,12 @@ const likeByLocations = require('./like-bot/by-location/likeBotByLocation');
 
 (async () => {
 	await ig.init(); // initialize chromium browser and page
+
 	await setLanguage(); // set english language at first
 	await login(config.username, config.password); // log in to instagram using config data from config file
 	await closeNotificationModal(); // close notification modal which is always showing after login
-	// await updateProfileInfo(); // update count number of posts, followers, following ppl
+
+	if (config.updateProfileInfo === true) await updateProfileInfo(); // update count number of posts, followers, following ppl
+
 	await likeByLocations(config.likeByLocation);
 })();
