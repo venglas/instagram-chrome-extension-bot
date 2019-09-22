@@ -8,6 +8,8 @@ const updateProfileInfo = require('./updateProfileInfo');
 
 const likeByLocations = require('./like-bot/by-location/likeBotByLocation');
 
+const showStats = require('./showStats');
+
 (async () => {
 	await ig.init(); // initialize chromium browser and page
 
@@ -17,5 +19,7 @@ const likeByLocations = require('./like-bot/by-location/likeBotByLocation');
 
 	if (config.updateProfileInfo === true) await updateProfileInfo(); // update count number of posts, followers, following ppl
 
-	await likeByLocations(config.likeByLocation);
+	// await likeByLocations(config.likeByLocation);
+
+	await showStats();
 })();
