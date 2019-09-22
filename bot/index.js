@@ -19,7 +19,7 @@ const showStats = require('./showStats');
 
 	if (config.updateProfileInfo === true) await updateProfileInfo(); // update count number of posts, followers, following ppl
 
-	// await likeByLocations(config.likeByLocation);
+	await likeByLocations(config.likeByLocation); //liking newest photos from choiced locations
 
-	await showStats();
+	await showStats(); // show all collected stats
 })();

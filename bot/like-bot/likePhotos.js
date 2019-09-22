@@ -3,20 +3,21 @@ const ig = require('../instagram');
 const config = require('../config');
 
 const resetLastLikeData = () => {
-	const profileInfo = JSON.parse(fs.readFileSync('./bot-data/profileInfo.json'));
+	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
 	profileInfo.lastLikes = 0;
 	const changedData = JSON.stringify(profileInfo);
-	fs.writeFileSync('./bot-data/profileInfo.json', changedData); //rewrite profile info .json file
+	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
 };
 
 const updateLikeData = () => {
-	const profileInfo = JSON.parse(fs.readFileSync('./bot-data/profileInfo.json'));
+	// change this way for updating cuz it's  really bad practice to write file on every action
+	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
 
 	profileInfo.allLikes = profileInfo.allLikes + 1;
 	profileInfo.lastLikes = profileInfo.lastLikes + 1;
 
 	const changedData = JSON.stringify(profileInfo);
-	fs.writeFileSync('./bot-data/profileInfo.json', changedData); //rewrite profile info .json file
+	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
 };
 
 const likePhotos = async (photos) => {
@@ -40,7 +41,7 @@ const likePhotos = async (photos) => {
 			await ig.page.waitFor(waitTime);
 		} else if ((await ig.page.$x('//section/span/button/span[contains(@aria-label, "Unlike")]')) !== null) {
 			await ig.page.waitFor(2000);
-			await ig.page.click('.ckWGn');
+			await ig.page.click('.ckWGn'); // close photo modal
 		}
 	}
 };

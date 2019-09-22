@@ -3,7 +3,7 @@ const fs = require('fs');
 const consoleLineBreak = require('./helpers/consoleLineBreak');
 
 const showStats = () => {
-	let profileInfo = JSON.parse(fs.readFileSync('./bot-data/profileInfo.json')); // load json file
+	let profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json')); // load json file
 	const logInfo = `stats: 
     username: ${profileInfo.username}
     followers: ${profileInfo.followers}
