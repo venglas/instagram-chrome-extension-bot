@@ -2,6 +2,7 @@ const fs = require('fs');
 const ig = require('../../instagram');
 
 const getPhotos = require('../getPhotos');
+const likePhotos = require('../likePhotos');
 
 const likeBotByLocation = async (likeByLocationConfig) => {
 	const locations = fs.readFileSync('./bot-data/locations.json'); // Load all polish city locations code
@@ -23,9 +24,10 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 				await ig.page.goto(`${ig.LOCATIONS_URL}/${locationCode}`, { waitUntil: 'networkidle2' });
 				await ig.page.waitFor(3000);
 				// TODO:
-				await getPhotos();
+				const newestPhotos = await getPhotos();
 
-				// select first 10-20-30 first fresh photos of location and add it all to array
+				await likePhotos(newestPhotos);
+
 				//  go to next location and do same thing till locations list end
 				// after fill all locations photos go to liking via array of photo links
 				// array with photo links can be store in other json file or in varaible in this file

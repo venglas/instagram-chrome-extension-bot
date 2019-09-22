@@ -1,4 +1,3 @@
-const fs = require('fs');
 const ig = require('../instagram');
 
 const getPhotos = async () => {
