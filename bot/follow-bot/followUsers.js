@@ -2,13 +2,11 @@ const fs = require('fs');
 
 const config = require('../config');
 const ig = require('../instagram');
-const setLanguage = require('../setLanguage');
-const login = require('../login');
-const closeNotificationModal = require('../closeNotificationModal');
-const updateProfileInfo = require('../updateProfileInfo');
-const getPhotos = require('../like-bot/getPhotos');
+
+const openInstagram = require('../helpers/openInstagram');
 const goToLocation = require('../helpers/goToLocation');
 const updateLikeData = require('../helpers/updateLikeData');
+
 const updateFollowedUsersList = require('../helpers/updateFollowedUsersList');
 
 const goFollow = async (locations) => {
@@ -68,11 +66,7 @@ const goFollow = async (locations) => {
 
 const followUsers = async (followByLocationConfig) => {
 	if (config.followBot.isStart === true) {
-		await ig.init(); // open browser
-		await setLanguage(); // set language to en
-		await login(config.username, config.password); //login to instagram
-		await closeNotificationModal(); // close modal which notification info
-		if (config.updateProfileInfo === true) await updateProfileInfo(); // update count number of posts, followers, following ppl
+		await openInstagram();
 
 		const locations = JSON.parse(fs.readFileSync('bot/bot-data/locations.json')); // Load all polish city locations code
 		const locationsEntries = Object.entries(locations); // rewrite object to array which contains pair arrays [[name, value], [[name], [value]]]
@@ -89,7 +83,7 @@ const followUsers = async (followByLocationConfig) => {
 
 			for (const [ locationName, locationCode ] of locationsEntries) {
 				if (config.followBot.locations.includes(locationName)) {
-					declaredLocations.push([ locationName, locationCode ]);
+					declaredLocations.push([ locationName, locationCode ]); // set locations from config file
 				}
 			}
 
