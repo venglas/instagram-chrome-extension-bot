@@ -1,8 +1,3 @@
-// go to the location an get first 10 ppl who add new photo
-// like all these 10 photos
-// go to each profile
-// follow user
-// add user profile link to profile
 const fs = require('fs');
 
 const config = require('../config');

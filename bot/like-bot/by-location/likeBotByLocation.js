@@ -5,12 +5,7 @@ const config = require('../../config');
 const getPhotos = require('../getPhotos');
 const likePhotos = require('../likePhotos');
 
-const goToNewLocation = async (locationName, locationCode) => {
-	console.log(`${locationName} ${locationCode}`);
-
-	await ig.page.goto(`${ig.LOCATIONS_URL}/${locationCode}`, { waitUntil: 'networkidle2' }); // change location
-	await ig.page.waitFor(config.likeByLocation.waitAfterChangeLocation); // wait after change location
-};
+const goToLocation = require('../../helpers/goToLocation');
 
 const likeBotByLocation = async (likeByLocationConfig) => {
 	const locations = fs.readFileSync('bot/bot-data/locations.json'); // Load all polish city locations code
@@ -24,7 +19,7 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 		console.log('');
 
 		for (const [ locationName, locationCode ] of entries) {
-			await goToNewLocation(locationName, locationCode);
+			await goToLocation(locationName, locationCode, config.waitAfterChangeLocation);
 
 			const newestPhotos = await getPhotos(); // list of photos (array)
 
@@ -34,7 +29,7 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 		// if user put his cities to array just search it in our default cities object
 		for (const [ locationName, locationCode ] of entries) {
 			if (likeByLocationConfig.locations.includes(locationName)) {
-				await goToNewLocation(locationName, locationCode);
+				await goToLocation(locationName, locationCode, config.waitAfterChangeLocation);
 
 				const newestPhotos = await getPhotos(); // list of photos (array)
 
