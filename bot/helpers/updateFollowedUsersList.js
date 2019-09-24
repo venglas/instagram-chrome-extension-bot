@@ -5,7 +5,7 @@ const updateFollowedUsersList = async (userName) => {
 
 	const user = {
 		userName: userName,
-		FollowDate: Date.now()
+		FollowDate: Date.now() // returns currently date in miliseconds
 	};
 
 	followedUsersList.followedUsers.push(user);
