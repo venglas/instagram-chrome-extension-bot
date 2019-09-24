@@ -1,6 +1,7 @@
 const ig = require('../instagram');
 const setLanguage = require('../setLanguage');
 const login = require('../login');
+const config = require('../config');
 const closeNotificationModal = require('../closeNotificationModal');
 const updateProfileInfo = require('../updateProfileInfo');
 
