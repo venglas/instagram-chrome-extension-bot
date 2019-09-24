@@ -1,5 +1,6 @@
 const ig = require('./instagram');
 const consoleLineBreak = require('./helpers/consoleLineBreak');
+const consoleColor = require('./helpers/colorsLog');
 
 const setLanguage = async () => {
 	console.time('Changing language done.');

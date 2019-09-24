@@ -1,8 +1,12 @@
 // const config = require('./config');
 const fs = require('fs');
 const consoleLineBreak = require('./helpers/consoleLineBreak');
+const colorlogs = require('./helpers/colorsLog');
 
 const showStats = () => {
+	consoleLineBreak('=');
+	console.log(colorlogs.FgGreen); // change color log to green
+
 	let profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json')); // load json file
 	const logInfo = `stats: 
     username: ${profileInfo.username}

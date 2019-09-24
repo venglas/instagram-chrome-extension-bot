@@ -2,8 +2,11 @@ const ig = require('./instagram');
 const config = require('./config');
 const fs = require('fs');
 const consoleLineBreak = require('./helpers/consoleLineBreak');
+const consoleColors = require('./helpers/colorsLog');
 
 const updateProfileInfo = async () => {
+	console.log(consoleColors.FgGreen); // change console font color to green
+
 	console.time('Profile info updated:');
 	await ig.page.goto(`${ig.BASE_URL}/${config.username}`);
 
@@ -32,6 +35,7 @@ const updateProfileInfo = async () => {
 	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
 
 	console.timeEnd('Profile info updated:');
+	console.log(''); //empty line in terminal view
 	console.log(profileInfo);
 	consoleLineBreak('=');
 

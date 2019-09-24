@@ -20,6 +20,9 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 
 	// If in config file user not insert any locations, default action is get all locations from locations.json file
 	if (likeByLocationConfig.locations.length === 0) {
+		console.log('Bot will be going to every city from default array of cities.');
+		console.log('');
+
 		for (const [ locationName, locationCode ] of entries) {
 			await goToNewLocation(locationName, locationCode);
 
