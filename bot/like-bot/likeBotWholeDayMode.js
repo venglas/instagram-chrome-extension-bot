@@ -7,6 +7,8 @@ const likeByLocations = require('./by-location/likeBotByLocation');
 
 const showStats = require('../showStats');
 
+const headingLog = require('../helpers/headingLog');
+
 const initLikeByLocationProcess = async () => {
 	console.log('Bot will be running until you stop it.');
 	console.log('');
@@ -25,6 +27,7 @@ const initLikeByLocationProcess = async () => {
 const likeBotWholeDayMode = async () => {
 	//liking bot will be playing with not end, we must stopped it by myself
 	if (config.likeByLocation.isStart === true && config.likeByLocation.wholeDayMode.isStart === true) {
+		headingLog('Start like bot for whole day');
 		await initLikeByLocationProcess();
 
 		const breakAfterDone = config.likeByLocation.wholeDayMode.breakAfterDone; // this value is pass in minutes
@@ -35,6 +38,7 @@ const likeBotWholeDayMode = async () => {
 
 		initLikeByLocationProcess();
 	} else if (config.likeByLocation.isStart === true && config.likeByLocation.wholeDayMode.isStart === false) {
+		headingLog('Start like bot for once');
 		await initLikeByLocationProcess();
 	}
 };

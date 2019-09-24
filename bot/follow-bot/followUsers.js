@@ -8,6 +8,7 @@ const goToLocation = require('../helpers/goToLocation');
 const updateLikeData = require('../helpers/updateLikeData');
 
 const updateFollowedUsersList = require('../helpers/updateFollowedUsersList');
+const headingLog = require('../helpers/headingLog');
 
 const goFollow = async (locations) => {
 	for (const [ locationName, locationCode ] of locations) {
@@ -65,6 +66,8 @@ const goFollow = async (locations) => {
 };
 
 const followUsers = async (followByLocationConfig) => {
+	headingLog('Start followers bot');
+
 	if (config.followBot.isStart === true) {
 		await openInstagram();
 
