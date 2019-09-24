@@ -3,6 +3,8 @@
 
 # files:
 package-lock.json
+/bot-data/followedUsers.json
+/bot-data/profileInfo.json
 
 # here is all configuration for running bot 
 bot/config.js
