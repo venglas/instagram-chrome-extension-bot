@@ -7,7 +7,7 @@ const updateProfileInfo = require('../updateProfileInfo');
 const checkData = require('../bot-data/checkData');
 
 const openInstagram = async () => {
-	await checkData();
+	await checkData(); // check bot-data json files and create it if it not exist
 	await ig.init(); // open browser
 	await setLanguage(); // set language to en
 	await login(config.username, config.password); //login to instagram
