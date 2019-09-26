@@ -8,6 +8,20 @@ const removeUserFromFollowedList = async (index, list) => {
 	await fs.writeFileSync('bot/bot-data/followedUsers.json', JSON.stringify(list)); // save data without unfollowed users
 };
 
+const showCountOfUsersToUnfollow = (followedUsersList, dateNow, day) => {
+	const usersToUnfollow = [];
+
+	for (user of followedUsersList) {
+		const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
+
+		if (followedUserTime / day > config.unfollow.afterDays) {
+			usersToUnfollow.push(user);
+		}
+	}
+
+	console.log(`Users to unfollow: ${usersToUnfollow.length}`);
+};
+
 const unfollow = async () => {
 	if (config.unfollow.isStart === true) {
 		const followedUsers = JSON.parse(fs.readFileSync('bot/bot-data/followedUsers.json'));
@@ -15,23 +29,13 @@ const unfollow = async () => {
 		const hour = 3600000; // hour calculate to miliseconds
 		const day = 86400000; // day calculate to miliseconds
 
-		const convertDaysToHours = 24 * hour * config.unfollow.afterDays;
+		// const convertDaysToHours = 24 * hour * config.unfollow.afterDays; // not used
 
 		let i = 0;
 
 		await openInstagram();
 
-		const usersToUnfollow = [];
-
-		for (user of followedUsers) {
-			const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
-
-			if (followedUserTime / day > config.unfollow.afterDays) {
-				usersToUnfollow.push(user);
-			}
-		}
-
-		console.log(`Users to unfollow: ${usersToUnfollow.length}`);
+		showCountOfUsersToUnfollow(followedUsers, dateNow, day);
 
 		for (user of followedUsers) {
 			const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
