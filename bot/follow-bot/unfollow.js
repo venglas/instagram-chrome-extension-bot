@@ -27,10 +27,10 @@ const unfollow = async () => {
 
 				// if bot not find 'following' button that user are not followed or user was blocked
 				if (isUserBlocked.length === 0) {
-					console.log(`ERROR THIS USER (${user.userName}) WAS BLOCKED ON INSTAGRAM`);
+					console.log(`ERROR THIS USER (${user.userName}) WAS BLOCKED ON INSTAGRAM, OR YOU UNFOLLOWED HIM MANUALLY.`);
 					await ig.page.goto(ig.BASE_URL);
 
-					//add here romove blocked user from followed list
+					followedUsers.splice(i, 1); //remove unfollowed use
 				} else {
 					const unfollowButton1 = await ig.page.$x("//button[contains(text(), 'Following')]"); // click for open modal for unfollowing
 					await unfollowButton1[0].click();
