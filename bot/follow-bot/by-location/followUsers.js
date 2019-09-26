@@ -1,14 +1,14 @@
 const fs = require('fs');
 
-const config = require('../config');
-const ig = require('../instagram');
+const config = require('../../config');
+const ig = require('../../instagram');
 
-const openInstagram = require('../helpers/openInstagram');
-const goToLocation = require('../helpers/goToLocation');
-const updateLikeData = require('../helpers/updateLikeData');
+const openInstagram = require('../../helpers/openInstagram');
+const goToLocation = require('../../helpers/goToLocation');
+const updateLikeData = require('../../helpers/updateLikeData');
 
-const updateFollowedUsersList = require('../helpers/updateFollowedUsersList');
-const headingLog = require('../helpers/headingLog');
+const updateFollowedUsersList = require('../../helpers/updateFollowedUsersList');
+const headingLog = require('../../helpers/headingLog');
 
 const goFollow = async (locations) => {
 	for (const [ locationName, locationCode ] of locations) {
@@ -27,7 +27,7 @@ const goFollow = async (locations) => {
 			await ig.page.waitFor(3000); // wait after go to profile (time to load profile)
 
 			const allProfilePhotos = await ig.page.$$('article > div > div > div > div > a'); // get all photos of profile
-			const profilePhotos = await [ ...allProfilePhotos.slice(0, config.followBot.howMuchProfilePhotoLikes - 1) ]; // select profiles (9 cuz 10 first photos are Most liked photos, not newest)
+			const profilePhotos = await [ ...allProfilePhotos.slice(0, config.followBot.howMuchProfilePhotoLikes) ]; // select profiles (9 cuz 10 first photos are Most liked photos, not newest)
 
 			for (photo of profilePhotos) {
 				await photo.click();
@@ -56,9 +56,13 @@ const goFollow = async (locations) => {
 			const userName = await ig.page.evaluate((userNameElement) => userNameElement.innerText, userNameElement); // get text from element (username)
 
 			await ig.page.waitFor(500);
-			await ig.page.click('._5f5mN'); // follow currently user
+			const followButton = await ig.page.$x("//button[contains(text(), 'Follow')]");
+			await followButton[0].click();
 
 			await updateFollowedUsersList(userName); // update followed user list
+
+			console.log(`User -> ${userName} followed.`);
+			console.log('');
 
 			await ig.page.waitFor(2000);
 		}

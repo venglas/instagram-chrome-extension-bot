@@ -2,7 +2,7 @@ const ig = require('./instagram');
 const consoleLineBreak = require('./helpers/consoleLineBreak');
 
 const login = async (username, password) => {
-	console.time('User logged in.');
+	console.time(`User ${username} logged in.`);
 	await ig.page.goto(`${ig.BASE_URL}/accounts/login/`, { waitUntil: 'networkidle2' });
 
 	await ig.page.waitForSelector('input[name="username"');
@@ -15,7 +15,7 @@ const login = async (username, password) => {
 
 	await loginButton[0].click();
 
-	console.timeEnd('User logged in.');
+	console.timeEnd(`User ${username} logged in.`);
 	consoleLineBreak('=');
 };
 

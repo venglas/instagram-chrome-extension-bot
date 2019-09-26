@@ -8,7 +8,7 @@ const updateFollowedUsersList = async (userName) => {
 		FollowDate: Date.now() // returns currently date in miliseconds
 	};
 
-	followedUsersList.followedUsers.push(user);
+	followedUsersList.push(user);
 
 	const changedData = JSON.stringify(followedUsersList);
 	fs.writeFileSync('bot/bot-data/followedUsers.json', changedData); //rewrite followed user list info .json file
