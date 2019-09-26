@@ -3,6 +3,11 @@ const config = require('../config');
 const openInstagram = require('../helpers/openInstagram');
 const ig = require('../instagram');
 
+const removeUserFromFollowedList = async (index, list) => {
+	list.splice(index, 1); //remove unfollowed use
+	await fs.writeFileSync('bot/bot-data/followedUsers.json', JSON.stringify(list)); // save data without unfollowed users
+};
+
 const unfollow = async () => {
 	if (config.unfollow.isStart === true) {
 		const followedUsers = JSON.parse(fs.readFileSync('bot/bot-data/followedUsers.json'));
@@ -16,10 +21,23 @@ const unfollow = async () => {
 
 		await openInstagram();
 
+		const usersToUnfollow = [];
+
 		for (user of followedUsers) {
 			const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
 
 			if (followedUserTime / day > config.unfollow.afterDays) {
+				usersToUnfollow.push(user);
+			}
+		}
+
+		console.log(`Users to unfollow: ${usersToUnfollow.length}`);
+
+		for (user of followedUsers) {
+			const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
+
+			if (followedUserTime / day > config.unfollow.afterDays) {
+				await ig.page.waitFor(500);
 				await ig.page.goto(`${ig.BASE_URL}/${user.userName}`);
 				await ig.page.waitFor(2000);
 
@@ -28,9 +46,11 @@ const unfollow = async () => {
 				// if bot not find 'following' button that user are not followed or user was blocked
 				if (isUserBlocked.length === 0) {
 					console.log(`ERROR THIS USER (${user.userName}) WAS BLOCKED ON INSTAGRAM, OR YOU UNFOLLOWED HIM MANUALLY.`);
-					await ig.page.goto(ig.BASE_URL);
+					// await ig.page.goto(ig.BASE_URL);
 
-					followedUsers.splice(i, 1); //remove unfollowed use
+					removeUserFromFollowedList(i, followedUsers);
+
+					await ig.page.waitFor(1000);
 				} else {
 					const unfollowButton1 = await ig.page.$x("//button[contains(text(), 'Following')]"); // click for open modal for unfollowing
 					await unfollowButton1[0].click();
@@ -41,9 +61,7 @@ const unfollow = async () => {
 
 					console.log(`User -> ${user.userName} unfollowed.`);
 
-					followedUsers.splice(i, 1); //remove unfollowed use
-
-					await fs.writeFileSync('bot/bot-data/followedUsers.json', JSON.stringify(followedUsers)); // save data without unfollowed users
+					removeUserFromFollowedList(i, followedUsers);
 
 					await ig.page.waitFor(1000);
 				}
