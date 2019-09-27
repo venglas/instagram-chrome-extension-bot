@@ -67,7 +67,19 @@ const unfollow = async () => {
 
 					removeUserFromFollowedList(i, followedUsers);
 
-					await ig.page.waitFor(1000);
+					await ig.page.waitFor(1500);
+
+					const userIsFollowingYou = await ig.page.$x("//button[contains(text(), 'Follow Back')]"); // user must have following you and get text from which button
+
+					// play sound if bot unffolow the user who following you, and add this user to other list
+					if (userIsFollowingYou.length > 0) {
+						console.log(`You unfollowed ${user.userName}, who following you. Person was added to another list.`);
+
+						const player = require('play-sound')((opts = {}));
+						player.play('bot/bot-data/sounds/accomplished.mp3'); // play sound
+
+						// TODO: make screenshoot of profile which following you and you unfollowed.
+					}
 				}
 			}
 			i++;

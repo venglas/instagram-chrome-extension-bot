@@ -6,7 +6,9 @@
 	"repository": "https://github.com/venglas/instagram-chrome-extension-bot.git",
 	"author": "Venglas <bartek.bober97@gmail.com>",
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"play-sound": "^1.1.3"
+	},
 	"scripts": {
 		"start": "node ./bot/index.js"
 	},

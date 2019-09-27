@@ -16,7 +16,7 @@ const goFollow = async (locations) => {
 
 		// by this newestPhotosLinks bot will go to profiles, each photo = profile
 		const newestPhotosLinks = await ig.page.$$eval('article div div div div a', (as) => as.map((a) => a.href));
-		const newestPhotosLinksCleared = await [ ...newestPhotosLinks.slice(9, 9 + config.followBot.howMuchFollowsOnLocation - 1) ]; // select profiles (9 cuz 10 first photos are Most liked photos, not newest)
+		const newestPhotosLinksCleared = await [ ...newestPhotosLinks.slice(9, 9 + config.followBot.howMuchFollowsOnLocation) ]; // select profiles (9 cuz 10 first photos are Most liked photos, not newest)
 
 		for (photo of newestPhotosLinksCleared) {
 			await ig.page.goto(photo);
