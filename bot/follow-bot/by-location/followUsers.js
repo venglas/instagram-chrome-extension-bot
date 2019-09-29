@@ -70,9 +70,8 @@ const goFollow = async (locations) => {
 };
 
 const followUsers = async (followByLocationConfig) => {
-	headingLog('Start followers bot');
-
 	if (config.followBot.isStart === true) {
+		headingLog('Start followers bot');
 		await openInstagram();
 
 		const locations = JSON.parse(fs.readFileSync('bot/bot-data/locations.json')); // Load all polish city locations code

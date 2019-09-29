@@ -24,20 +24,20 @@ const showCountOfUsersToUnfollow = (followedUsersList, dateNow, day) => {
 
 const unfollow = async () => {
 	if (config.unfollow.isStart === true) {
-		const followedUsers = JSON.parse(fs.readFileSync('bot/bot-data/followedUsers.json'));
+		let followedUsers = JSON.parse(fs.readFileSync('bot/bot-data/followedUsers.json'));
 		const dateNow = Date.now(); // now time in miliseconds
 		const hour = 3600000; // hour calculate to miliseconds
 		const day = 86400000; // day calculate to miliseconds
 
 		// const convertDaysToHours = 24 * hour * config.unfollow.afterDays; // not used
 
-		let i = 0;
-
 		await openInstagram();
 
 		showCountOfUsersToUnfollow(followedUsers, dateNow, day);
 
-		for (user of followedUsers) {
+		for (const user of followedUsers) {
+			let i = 0;
+			followedUsers = JSON.parse(fs.readFileSync('bot/bot-data/followedUsers.json')); // overwrite followedUsers after unfollow
 			const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
 
 			if (followedUserTime / day > config.unfollow.afterDays) {
@@ -50,7 +50,6 @@ const unfollow = async () => {
 				// if bot not find 'following' button that user are not followed or user was blocked
 				if (isUserBlocked.length === 0) {
 					console.log(`ERROR THIS USER (${user.userName}) WAS BLOCKED ON INSTAGRAM, OR YOU UNFOLLOWED HIM MANUALLY.`);
-					// await ig.page.goto(ig.BASE_URL);
 
 					removeUserFromFollowedList(i, followedUsers);
 
@@ -77,6 +76,16 @@ const unfollow = async () => {
 
 						const player = require('play-sound')((opts = {}));
 						player.play('bot/bot-data/sounds/accomplished.mp3'); // play sound
+
+						const unfollowedUsersWhoFollowingYouList = JSON.parse(await fs.readFileSync('./bot/bot-data/unfollowedUsersWhoFollowingYou.json')); // FIXME: no such file or directory
+
+						const newUser = {
+							userName: user.userName
+						};
+
+						unfollowedUsersWhoFollowingYouList.push(newUser);
+
+						await fs.writeFileSync('./bot/bot-data/unfollowedUsersWhoFollowingYou.json', JSON.stringify(unfollowedUsersWhoFollowingYouList));
 
 						// TODO: make screenshoot of profile which following you and you unfollowed.
 					}
