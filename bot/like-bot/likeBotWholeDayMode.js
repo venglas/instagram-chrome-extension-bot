@@ -26,7 +26,7 @@ const initLikeByLocationProcess = async () => {
 
 const likeBotWholeDayMode = async () => {
 	//liking bot will be playing with not end, we must stopped it by myself
-	if (config.likeByLocation.isStart === true && config.likeByLocation.wholeDayMode.isStart === true) {
+	if (config.isOn.likeByLocation === true && config.likeByLocation.wholeDayMode.isStart === true) {
 		headingLog('Start like bot for whole day');
 		await initLikeByLocationProcess();
 
@@ -37,7 +37,7 @@ const likeBotWholeDayMode = async () => {
 		await ig.page.waitFor(breakAfterDoneMinutes);
 
 		initLikeByLocationProcess();
-	} else if (config.likeByLocation.isStart === true && config.likeByLocation.wholeDayMode.isStart === false) {
+	} else if (config.isOn.likeByLocation === true && config.likeByLocation.wholeDayMode.isStart === false) {
 		headingLog('Start like bot for once');
 		await initLikeByLocationProcess();
 	}

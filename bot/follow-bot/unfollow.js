@@ -23,7 +23,7 @@ const showCountOfUsersToUnfollow = (followedUsersList, dateNow, day) => {
 };
 
 const unfollow = async () => {
-	if (config.unfollow.isStart === true) {
+	if (config.isOn.unfollow === true) {
 		let followedUsers = JSON.parse(fs.readFileSync('bot/bot-data/followedUsers.json'));
 		const dateNow = Date.now(); // now time in miliseconds
 		const hour = 3600000; // hour calculate to miliseconds
@@ -92,6 +92,8 @@ const unfollow = async () => {
 				}
 			}
 			i++;
+
+			console.log(followedUsers);
 		}
 	}
 };
