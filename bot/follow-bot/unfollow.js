@@ -93,7 +93,7 @@ const unfollow = async () => {
 			}
 			i++;
 
-			console.log(followedUsers);
+			// console.log(followedUsers);
 		}
 	}
 };

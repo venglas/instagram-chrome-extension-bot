@@ -70,7 +70,7 @@ const goFollow = async (locations) => {
 };
 
 const followUsers = async (followByLocationConfig) => {
-	if (config.isOn.followBot === true) {
+	if (config.isOn.followBot === true || (config.isOn.fullBotMode === true && config.fullBotMode.functionalities.followBot === true)) {
 		headingLog('Start followers bot');
 		await openInstagram();
 
