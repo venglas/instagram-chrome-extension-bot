@@ -69,14 +69,14 @@ const goFollow = async (locations) => {
 	}
 };
 
+let counter = 0; // counter for followUsers function which doesn't let open browser more than one time
 const followUsers = async (followByLocationConfig) => {
-	const counter = 0;
 	//if fullBotMode is true and followBot is true it will runs, but if fullBotMode is false this will be running only for basic followBot (not entire day)
 	if ((config.isOn.fullBotMode === true && config.fullBotMode.functionalities.followBot === true) || config.isOn.followBot === true) {
 		headingLog('Start followers bot');
 
 		//if bot is running at full mode (working whole day) just open once browser window
-		if (config.isOn.fullBotMode === true && counter < 1) {
+		if (config.isOn.fullBotMode === true && counter === 0) {
 			await openInstagram();
 		}
 
@@ -103,6 +103,7 @@ const followUsers = async (followByLocationConfig) => {
 		}
 	}
 	counter++;
+	console.log('Counter: ', counter);
 };
 
 module.exports = followUsers;

@@ -2,7 +2,7 @@ const config = require('../config');
 
 const ig = require('../instagram');
 
-const openInstagram = require('../helpers/openInstagram');
+// const openInstagram = require('../helpers/openInstagram');
 const showStats = require('../showStats');
 
 const followUsers = require('../follow-bot/by-location/followUsers');
