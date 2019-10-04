@@ -1,6 +1,12 @@
 const config = require('../config');
 
+const ig = require('../instagram');
+
+const openInstagram = require('../helpers/openInstagram');
+const showStats = require('../showStats');
+
 const followUsers = require('../follow-bot/by-location/followUsers');
+const likePhotosByLocation = require('../like-bot/by-location/likeBotByLocation');
 
 const fullBotMode = async () => {
 	if (config.isOn.fullBotMode === true) {
@@ -9,11 +15,19 @@ const fullBotMode = async () => {
 		//like bot (by location)
 		// unfollow
 
-		if (config.fullBotMode.functionalities.followBot) {
+		if (config.fullBotMode.functionalities.followBot === true) {
 			await followUsers(config.followBot);
 		}
-		if (config.fullBotMode.functionalities.likeBot) console.log('like bot runs');
-		if (config.fullBotMode.functionalities.unfollow) console.log('unfollow bot runs');
+
+		if (config.fullBotMode.functionalities.likeBot === true) {
+			// await openInstagram();
+			await likePhotosByLocation(config.likeByLocation);
+			await showStats();
+			// wait some time then close browser
+			//wait some time to run next functionality
+		}
+
+		// if (config.fullBotMode.functionalities.unfollow) console.log('unfollow bot runs');
 	}
 };
 

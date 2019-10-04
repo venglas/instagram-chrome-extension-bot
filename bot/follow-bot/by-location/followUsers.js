@@ -70,7 +70,8 @@ const goFollow = async (locations) => {
 };
 
 const followUsers = async (followByLocationConfig) => {
-	if (config.isOn.followBot === true || (config.isOn.fullBotMode === true && config.fullBotMode.functionalities.followBot === true)) {
+	//if fullBotMode is true and followBot is true it will runs, but if fullBotMode is false this will be running only for basic followBot (not entire day)
+	if ((config.isOn.fullBotMode === true && config.fullBotMode.functionalities.followBot === true) || config.isOn.followBot === true) {
 		headingLog('Start followers bot');
 		await openInstagram();
 
@@ -80,7 +81,7 @@ const followUsers = async (followByLocationConfig) => {
 		if (followByLocationConfig.locations.length === 0) {
 			console.log('Bot will be going to every city from default array of cities.');
 			console.log('');
-			goFollow(locationsEntries);
+			await goFollow(locationsEntries);
 		} else {
 			console.log('Bot will be going to every city from declares locations.');
 			console.log('');
@@ -93,7 +94,7 @@ const followUsers = async (followByLocationConfig) => {
 				}
 			}
 
-			goFollow(declaredLocations);
+			await goFollow(declaredLocations);
 		}
 	}
 };

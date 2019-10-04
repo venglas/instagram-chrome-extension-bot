@@ -1,5 +1,5 @@
 const ig = require('../instagram');
-const consoleLineBreak = require('../helpers/consoleLineBreak');
+const consoleLineBreak = require('./consoleLineBreak');
 
 const goToLocation = async (locationName, locationCode, waitAfterChangeLocation) => {
 	consoleLineBreak('=');

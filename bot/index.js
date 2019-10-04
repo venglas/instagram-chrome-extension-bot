@@ -5,7 +5,8 @@ const fullBotMode = require('./full-bot-mode/fullBotMode');
 const config = require('./config');
 
 (async () => {
-	await followUsers(config.followBot);
+	if (config.isOn.fullBotMode === false) await followUsers(config.followBot);
+
 	await unfollow();
 	await likeBotWholeDayMode(); // run like bot all day or if it isn't set in configuration file, like bot will run only one time
 

@@ -8,7 +8,7 @@ const likePhotos = require('../likePhotos');
 const goToLocation = require('../../helpers/goToLocation');
 
 const likeBotByLocation = async (likeByLocationConfig) => {
-	if (config.isOn.likeByLocation === true) {
+	if ((config.isOn.fullBotMode === true && config.fullBotMode.functionalities.likeBot === true) || config.isOn.likeByLocation === true) {
 		const locations = fs.readFileSync('bot/bot-data/locations.json'); // Load all polish city locations code
 		const pasredLocations = JSON.parse(locations);
 
