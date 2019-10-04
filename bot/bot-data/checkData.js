@@ -6,7 +6,7 @@ const checkData = async () => {
 		console.log('Create followedUsers.json file');
 		consoleLineBreak('=');
 
-		await fs.writeFileSync('bot/bot-data/followedUsers.json', JSON.stringify({ followedUsers: [] }));
+		await fs.writeFileSync('bot/bot-data/followedUsers.json', JSON.stringify([]));
 	}
 
 	if ((await fs.existsSync('bot/bot-data/profileInfo.json')) === false) {

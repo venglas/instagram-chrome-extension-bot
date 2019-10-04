@@ -20,7 +20,6 @@ const fullBotMode = async () => {
 		}
 
 		if (config.fullBotMode.functionalities.likeBot === true) {
-			// await openInstagram();
 			await likePhotosByLocation(config.likeByLocation);
 			await showStats();
 			// wait some time then close browser
