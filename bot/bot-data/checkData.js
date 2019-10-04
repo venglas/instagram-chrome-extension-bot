@@ -1,7 +1,16 @@
 const fs = require('fs');
 const consoleLineBreak = require('../helpers/consoleLineBreak');
 
+const resetLastLikeData = () => {
+	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
+	profileInfo.lastLikes = 0;
+	const changedData = JSON.stringify(profileInfo);
+	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
+};
+
 const checkData = async () => {
+	resetLastLikeData();
+
 	if ((await fs.existsSync('bot/bot-data/followedUsers.json')) === false) {
 		console.log('Create followedUsers.json file');
 		consoleLineBreak('=');

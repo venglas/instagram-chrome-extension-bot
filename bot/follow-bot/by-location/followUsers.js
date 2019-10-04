@@ -103,7 +103,7 @@ const followUsers = async (followByLocationConfig) => {
 		}
 	}
 	counter++;
-	console.log('Counter: ', counter);
+	// console.log('Counter: ', counter);
 };
 
 module.exports = followUsers;

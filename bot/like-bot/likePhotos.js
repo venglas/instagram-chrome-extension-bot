@@ -2,13 +2,6 @@ const fs = require('fs');
 const ig = require('../instagram');
 const config = require('../config');
 
-const resetLastLikeData = () => {
-	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
-	profileInfo.lastLikes = 0;
-	const changedData = JSON.stringify(profileInfo);
-	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
-};
-
 const updateLikeData = () => {
 	// change this way for updating cuz it's  really bad practice to write file on every action
 	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
@@ -21,8 +14,6 @@ const updateLikeData = () => {
 };
 
 const likePhotos = async (photos) => {
-	resetLastLikeData();
-
 	for (photo of photos) {
 		await photo.click();
 		await ig.page.waitFor(1000);

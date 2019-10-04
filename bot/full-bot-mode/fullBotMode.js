@@ -1,7 +1,5 @@
 const config = require('../config');
 
-const ig = require('../instagram');
-
 // const openInstagram = require('../helpers/openInstagram');
 const showStats = require('../showStats');
 
@@ -23,7 +21,7 @@ const fullBotMode = async () => {
 
 			if (config.fullBotMode.functionalities.likeBot === true) {
 				await likePhotosByLocation(config.likeByLocation);
-				await showStats();
+				await showStats(); // after liking all locations show stats
 				// wait some time then close browser
 				//wait some time to run next functionality
 			}
