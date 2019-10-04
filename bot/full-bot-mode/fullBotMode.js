@@ -15,15 +15,18 @@ const fullBotMode = async () => {
 		//like bot (by location)
 		// unfollow
 
-		if (config.fullBotMode.functionalities.followBot === true) {
-			await followUsers(config.followBot);
-		}
+		while (true) {
+			if (config.fullBotMode.functionalities.followBot === true) {
+				console.log('follow');
+				await followUsers(config.followBot);
+			}
 
-		if (config.fullBotMode.functionalities.likeBot === true) {
-			await likePhotosByLocation(config.likeByLocation);
-			await showStats();
-			// wait some time then close browser
-			//wait some time to run next functionality
+			if (config.fullBotMode.functionalities.likeBot === true) {
+				await likePhotosByLocation(config.likeByLocation);
+				await showStats();
+				// wait some time then close browser
+				//wait some time to run next functionality
+			}
 		}
 
 		// if (config.fullBotMode.functionalities.unfollow) console.log('unfollow bot runs');

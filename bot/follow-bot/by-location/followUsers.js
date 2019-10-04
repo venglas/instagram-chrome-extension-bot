@@ -70,10 +70,15 @@ const goFollow = async (locations) => {
 };
 
 const followUsers = async (followByLocationConfig) => {
+	const counter = 0;
 	//if fullBotMode is true and followBot is true it will runs, but if fullBotMode is false this will be running only for basic followBot (not entire day)
 	if ((config.isOn.fullBotMode === true && config.fullBotMode.functionalities.followBot === true) || config.isOn.followBot === true) {
 		headingLog('Start followers bot');
-		await openInstagram();
+
+		//if bot is running at full mode (working whole day) just open once browser window
+		if (config.isOn.fullBotMode === true && counter < 1) {
+			await openInstagram();
+		}
 
 		const locations = JSON.parse(fs.readFileSync('bot/bot-data/locations.json')); // Load all polish city locations code
 		const locationsEntries = Object.entries(locations); // rewrite object to array which contains pair arrays [[name, value], [[name], [value]]]
@@ -97,6 +102,7 @@ const followUsers = async (followByLocationConfig) => {
 			await goFollow(declaredLocations);
 		}
 	}
+	counter++;
 };
 
 module.exports = followUsers;
