@@ -12,7 +12,7 @@ const headingLog = require('../../helpers/headingLog');
 
 const goFollow = async (locations) => {
 	for (const [ locationName, locationCode ] of locations) {
-		await goToLocation(locationName, locationCode, config.waitAfterChangeLocation);
+		await goToLocation(locationName, locationCode, config.followBot.waitAfterChangeLocation);
 
 		// by this newestPhotosLinks bot will go to profiles, each photo = profile
 		const newestPhotosLinks = await ig.page.$$eval('article div div div div a', (as) => as.map((a) => a.href));

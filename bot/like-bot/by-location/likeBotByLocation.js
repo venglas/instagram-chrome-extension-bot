@@ -23,9 +23,9 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 			console.log('');
 
 			for (const [ locationName, locationCode ] of entries) {
-				await goToLocation(locationName, locationCode, config.waitAfterChangeLocation);
+				await goToLocation(locationName, locationCode, config.likeByLocation.waitAfterChangeLocation);
 
-				const newestPhotos = await getPhotos(); // list of photos (array)
+				const newestPhotos = await getPhotos(config.likeByLocation.howMuchPhotos); // list of photos (array)
 
 				await likePhotos(newestPhotos); // like list of photos
 			}
@@ -33,9 +33,9 @@ const likeBotByLocation = async (likeByLocationConfig) => {
 			// if user put his cities to array just search it in our default cities object
 			for (const [ locationName, locationCode ] of entries) {
 				if (likeByLocationConfig.locations.includes(locationName)) {
-					await goToLocation(locationName, locationCode, config.waitAfterChangeLocation);
+					await goToLocation(locationName, locationCode, config.likeByLocation.waitAfterChangeLocation);
 
-					const newestPhotos = await getPhotos(); // list of photos (array)
+					const newestPhotos = await getPhotos(config.likeByLocation.howMuchPhotos); // list of photos (array)
 
 					await likePhotos(newestPhotos); // like list of photos
 
