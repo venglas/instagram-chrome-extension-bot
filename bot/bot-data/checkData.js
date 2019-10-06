@@ -1,35 +1,36 @@
 const fs = require('fs');
 const consoleLineBreak = require('../helpers/consoleLineBreak');
+const config = require('../config');
 
 const resetLastLikeData = () => {
-	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
+	const profileInfo = JSON.parse(fs.readFileSync(`bot/bot-data/profileInfo-${config.username}.json`));
 	profileInfo.lastLikes = 0;
 	const changedData = JSON.stringify(profileInfo);
-	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
+	fs.writeFileSync(`bot/bot-data/profileInfo-${config.username}.json`, changedData); //rewrite profile info .json file
 };
 
 const checkData = async () => {
 	resetLastLikeData();
 
-	if ((await fs.existsSync('bot/bot-data/followedUsers.json')) === false) {
-		console.log('Create followedUsers.json file');
+	if ((await fs.existsSync(`bot/bot-data/followedUsers-${config.username}.json`)) === false) {
+		console.log(`Create followedUsers-${config.username}.json file`);
 		consoleLineBreak('=');
 
-		await fs.writeFileSync('bot/bot-data/followedUsers.json', JSON.stringify([]));
+		await fs.writeFileSync(`bot/bot-data/followedUsers-${config.username}.json`, JSON.stringify([]));
 	}
 
-	if ((await fs.existsSync('bot/bot-data/profileInfo.json')) === false) {
-		console.log('Create profileInfo.json file');
+	if ((await fs.existsSync(`bot/bot-data/profileInfo-${config.username}.json`)) === false) {
+		console.log(`Create profileInfo-${config.username}.json file`);
 		consoleLineBreak('=');
 
-		await fs.writeFileSync('bot/bot-data/profileInfo.json', JSON.stringify({ username: '', posts: 0, followers: 0, following: 0, date: '', allLikes: 0, lastLikes: 0 }));
+		await fs.writeFileSync(`bot/bot-data/profileInfo-${config.username}.json`, JSON.stringify({ username: '', posts: 0, followers: 0, following: 0, date: '', allLikes: 0, lastLikes: 0 }));
 	}
 
-	if ((await fs.existsSync('bot/bot-data/unfollowedUsersWhoFollowingYou.json')) === false) {
-		console.log('Create unfollowedUsersWhoFollowingYou.json file');
+	if ((await fs.existsSync(`bot/bot-data/unfollowedUsersWhoFollowingYou-${config.username}.json`)) === false) {
+		console.log(`Create unfollowedUsersWhoFollowingYou-${config.username}.json file`);
 		consoleLineBreak('=');
 
-		await fs.writeFileSync('bot/bot-data/unfollowedUsersWhoFollowingYou.json', JSON.stringify([]));
+		await fs.writeFileSync(`bot/bot-data/unfollowedUsersWhoFollowingYou-${config.username}.json`, JSON.stringify([]));
 	}
 };
 

@@ -8,3 +8,5 @@ bot/bot-data/profileInfo.json
 
 # here is all configuration for running bot 
 bot/config.js
+
+# TODO: add files from bot-data

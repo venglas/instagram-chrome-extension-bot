@@ -21,7 +21,7 @@ const updateProfileInfo = async () => {
 	// Get number of followings ppl
 	const following = await ig.page.evaluate((span) => span.textContent, followersAndFollowingCount[1]);
 
-	let profileInfoData = fs.readFileSync('bot/bot-data/profileInfo.json'); // load json file
+	let profileInfoData = fs.readFileSync(`bot/bot-data/profileInfo-${config.username}.json`); // load json file
 	let profileInfo = JSON.parse(profileInfoData);
 
 	//set new info for .json file (profile info)
@@ -32,7 +32,7 @@ const updateProfileInfo = async () => {
 	profileInfo.date = new Date();
 
 	const changedData = JSON.stringify(profileInfo);
-	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
+	fs.writeFileSync(`bot/bot-data/profileInfo-${config.username}.json`, changedData); //rewrite profile info .json file
 
 	console.timeEnd('Profile info updated:');
 	console.log(''); //empty line in terminal view

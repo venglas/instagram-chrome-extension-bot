@@ -4,13 +4,13 @@ const config = require('../config');
 
 const updateLikeData = () => {
 	// change this way for updating cuz it's  really bad practice to write file on every action
-	const profileInfo = JSON.parse(fs.readFileSync('bot/bot-data/profileInfo.json'));
+	const profileInfo = JSON.parse(fs.readFileSync(`bot/bot-data/profileInfo-${config.username}.json`));
 
 	profileInfo.allLikes = profileInfo.allLikes + 1;
 	profileInfo.lastLikes = profileInfo.lastLikes + 1;
 
 	const changedData = JSON.stringify(profileInfo);
-	fs.writeFileSync('bot/bot-data/profileInfo.json', changedData); //rewrite profile info .json file
+	fs.writeFileSync(`bot/bot-data/profileInfo-${config.username}.json`, changedData); //rewrite profile info .json file
 };
 
 const likePhotos = async (photos) => {
