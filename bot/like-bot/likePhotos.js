@@ -14,6 +14,8 @@ const updateLikeData = () => {
 };
 
 const likePhotos = async (photos) => {
+	let counter = 0;
+
 	for (photo of photos) {
 		await photo.click();
 		await ig.page.waitFor(1000);
@@ -34,7 +36,10 @@ const likePhotos = async (photos) => {
 			await ig.page.waitFor(2000);
 			await ig.page.click('.ckWGn'); // close photo modal
 		}
+
+		counter++;
 	}
+	console.log('Here bot should actualize the photo like count information, likes: ', counter); // working good, here should actualize information about likes
 };
 
 module.exports = likePhotos;
