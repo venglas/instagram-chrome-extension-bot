@@ -2,12 +2,12 @@ const fs = require('fs');
 const ig = require('../instagram');
 const config = require('../config');
 
-const updateLikeData = () => {
+const updateLikeData = (howMuchPhotoLiked) => {
 	// change this way for updating cuz it's  really bad practice to write file on every action
 	const profileInfo = JSON.parse(fs.readFileSync(`bot/bot-data/profileInfo-${config.username}.json`));
 
-	profileInfo.allLikes = profileInfo.allLikes + 1;
-	profileInfo.lastLikes = profileInfo.lastLikes + 1;
+	profileInfo.allLikes = profileInfo.allLikes + howMuchPhotoLiked;
+	profileInfo.lastLikes = profileInfo.lastLikes + howMuchPhotoLiked;
 
 	const changedData = JSON.stringify(profileInfo);
 	fs.writeFileSync(`bot/bot-data/profileInfo-${config.username}.json`, changedData); //rewrite profile info .json file
@@ -39,7 +39,12 @@ const likePhotos = async (photos) => {
 
 		counter++;
 	}
-	console.log('Here bot should actualize the photo like count information, likes: ', counter); // working good, here should actualize information about likes
+
+	const profileInfo = JSON.parse(fs.readFileSync(`bot/bot-data/profileInfo-${config.username}.json`));
+	console.log(`Profile info updated. Added nuber of liked photos: ${counter}.
+	Now all liked photos: ${profileInfo.allLikes + counter}
+	`);
+	updateLikeData(counter);
 };
 
 module.exports = likePhotos;
