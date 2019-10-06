@@ -7,7 +7,7 @@ const showStats = () => {
 	consoleLineBreak('=');
 	console.log(colorlogs.FgGreen); // change color log to green
 
-	let profileInfo = JSON.parse(fs.readFileSync(`bot/bot-data/profileInfo-${config.username}.json`)); // load json file
+	let profileInfo = JSON.parse(fs.readFileSync(`bot/bot-data/user-data/profileInfo-${config.username}.json`)); // load json file
 	const logInfo = `stats: 
     username: ${profileInfo.username}
     followers: ${profileInfo.followers}

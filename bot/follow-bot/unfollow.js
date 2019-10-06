@@ -5,7 +5,7 @@ const ig = require('../instagram');
 
 const removeUserFromFollowedList = async (index, list) => {
 	list.splice(index, 1); //remove unfollowed use
-	await fs.writeFileSync(`bot/bot-data/followedUsers-${config.username}.json`, JSON.stringify(list)); // save data without unfollowed users
+	await fs.writeFileSync(`bot/bot-data/user-data/followedUsers-${config.username}.json`, JSON.stringify(list)); // save data without unfollowed users
 };
 
 const showCountOfUsersToUnfollow = (followedUsersList, dateNow, day) => {
@@ -24,7 +24,7 @@ const showCountOfUsersToUnfollow = (followedUsersList, dateNow, day) => {
 
 const unfollow = async () => {
 	if (config.isOn.unfollow === true) {
-		let followedUsers = JSON.parse(fs.readFileSync(`bot/bot-data/followedUsers-${config.username}.json`));
+		let followedUsers = JSON.parse(fs.readFileSync(`bot/bot-data/user-data/followedUsers-${config.username}.json`));
 		const dateNow = Date.now(); // now time in miliseconds
 		const hour = 3600000; // hour calculate to miliseconds
 		const day = 86400000; // day calculate to miliseconds
@@ -37,7 +37,7 @@ const unfollow = async () => {
 
 		for (const user of followedUsers) {
 			let i = 0;
-			followedUsers = JSON.parse(fs.readFileSync(`bot/bot-data/followedUsers-${config.username}.json`)); // overwrite followedUsers after unfollow
+			followedUsers = JSON.parse(fs.readFileSync(`bot/bot-data/user-data/followedUsers-${config.username}.json`)); // overwrite followedUsers after unfollow
 			const followedUserTime = dateNow - user.FollowDate; // time in milisecond since followed this user
 
 			if (followedUserTime / day > config.unfollow.afterDays) {
@@ -77,7 +77,7 @@ const unfollow = async () => {
 						const player = require('play-sound')((opts = {}));
 						player.play('bot/bot-data/sounds/accomplished.mp3'); // play sound
 
-						const unfollowedUsersWhoFollowingYouList = JSON.parse(await fs.readFileSync(`./bot/bot-data/unfollowedUsersWhoFollowingYou-${config.username}.json`));
+						const unfollowedUsersWhoFollowingYouList = JSON.parse(await fs.readFileSync(`./bot/bot-data/user-data/unfollowedUsersWhoFollowingYou-${config.username}.json`));
 
 						const newUser = {
 							userName: user.userName
@@ -85,7 +85,7 @@ const unfollow = async () => {
 
 						unfollowedUsersWhoFollowingYouList.push(newUser);
 
-						await fs.writeFileSync(`./bot/bot-data/unfollowedUsersWhoFollowingYou-${config.username}.json`, JSON.stringify(unfollowedUsersWhoFollowingYouList));
+						await fs.writeFileSync(`./bot/bot-data/user-data/unfollowedUsersWhoFollowingYou-${config.username}.json`, JSON.stringify(unfollowedUsersWhoFollowingYouList));
 
 						// TODO: make screenshoot of profile which following you and you unfollowed.
 					}

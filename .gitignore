@@ -1,5 +1,6 @@
 # directories
 /node_modules
+/bot/bot-data/user-data
 
 # files:
 package-lock.json
